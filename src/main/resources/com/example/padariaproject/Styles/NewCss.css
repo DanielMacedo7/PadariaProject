@@ -1,0 +1,131 @@
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-color:  linear-gradient(to bottom right, #228b22, #6be823);
+    -fx-border-width:  0.5px;
+}
+
+/* Estilo para a barra lateral */
+.side-bar {
+    -fx-background-color: linear-gradient(to bottom, #ffd700, #666);
+    -fx-pref-width: 200px; /* Largura preferencial */
+    -fx-min-width: 100px; /* Largura mínima */
+    -fx-max-width: 250px; /* Largura máxima */
+    -fx-border-width: 0 1px 0 0; /* Borda à direita */
+    -fx-border-color: #ccc; /* Cor da borda */
+}
+
+/* Estilo para os itens da barra lateral */
+.side-bar .menu-item {
+    -fx-padding: 10px 20px; /* Preenchimento interno */
+    -fx-text-fill: #fff; /* Cor do texto */
+    -fx-font-size: 14px; /* Tamanho da fonte */
+    -fx-border-width: 1px ; /* Borda inferior */
+    -fx-border-color: white; /* Cor da borda */
+    -fx-background-color: transparent; /* Cor de fundo transparente */
+}
+
+/* Estilo para os itens selecionados da barra lateral */
+.side-bar .menu-item:selected {
+    -fx-background-color: #ddd; /* Cor de fundo quando selecionado */
+}
+
+/* Estilo para os ícones da barra lateral */
+.side-bar .icon {
+    -fx-font-family: "FontAwesome"; /* Fonte para ícones do FontAwesome */
+    -fx-font-size: 18px; /* Tamanho do ícone */
+    -fx-fill: #555; /* Cor do ícone */
+}
+
+
+.nav-form {
+    -fx-background-color: linear-gradient(to bottom right, #ff5722, #ff7953);
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #fff;
+    -fx-border-width: .5px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+}
+
+.nav-btn:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: #000;
+}
+
+.logout-btn {
+    -fx-background-color: linear-gradient(to bottom right, #228b22, #6be823);
+    -fx-padding: 5px;
+    -fx-cursor: hand;
+    -fx-background-radius: 50px;
+}
+
+
+
+.white-bg {
+    -fx-background-color: #fff;
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+}
+
+.radius {
+    -fx-background-radius: 8px;
+}
+
+.transparent {
+    -fx-background-color: transparent;
+
+}
+
+.head-label {
+    -fx-border-color: #6be823;
+    -fx-border-width: 0 0 0 5px;
+    -fx-padding: 0 0 0 4px;
+
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: linear-gradient(to bottom right, #228b22, #6be823);
+    -fx-border-radius: 5px;
+    -fx-border-width: 1.5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #228b22, #6be823);
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-background-insets: 0 0 0 0;
+}
+
+.table-view .column-header, .filter {
+    -fx-background-color: transparent;
+    -fx-size: 43px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+}
+
+.list-view {
+    -fx-background-color: linear-gradient(to bottom, #228b22, #6be823); /* Gradiente linear de cima para baixo */
+}
+
+/* Estilo para os itens da ListView */
+.list-view .list-cell {
+    -fx-background-color: white; /* Fundo branco para cada item */
+    -fx-background-insets: 0, 1, 2; /* Inset do gradiente */
+    -fx-padding: 10px; /* Espaçamento interno */
+    -fx-border-color: #2ecc71; /* Cor da borda */
+    -fx-border-width: 1px; /* Espessura da borda */
+    -fx-border-radius: 5px; /* Raio da borda arredondada */
+}
+
+/* Estilo para o texto dentro dos itens da ListView */
+.list-view .list-cell .text {
+    -fx-text-fill: white; /* Cor do texto branco */
+}
