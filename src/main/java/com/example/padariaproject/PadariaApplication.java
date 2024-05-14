@@ -5,6 +5,7 @@ import com.example.padariaproject.Models.Funcionario;
 import com.example.padariaproject.Models.Perfil;
 import com.example.padariaproject.Models.Produtos;
 import com.example.padariaproject.Queries.INSERT;
+import com.example.padariaproject.Queries.UPDATE;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import static com.example.padariaproject.Queries.INSERT.*;
+import static com.example.padariaproject.Queries.UPDATE.*;
 
 public class PadariaApplication extends Application {
 
@@ -30,7 +32,44 @@ public class PadariaApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-     //   INSERT insert = new INSERT();
+        UPDATE update = new UPDATE();
+
+
+        // 1 - vamos testar o update de Funcionario por que o de perfil já está funcionando.
+        // 2 - Produtos. check.
+        // 3 - Estoque. check
+        // UPDATE feito de todas as entidades : Código disponível no github.
+
+       // Estoque estoque = new Estoque();
+       // estoque.setId_produto(2);
+       // estoque.setId(1);
+       // updateEstoque(estoque);
+
+
+
+      //  Produtos produtos = new Produtos();
+      //  produtos.setNome("Novo Produto");
+      //  produtos.setPrazo(new Date());
+      //  produtos.setCategoria("Salgados");
+      //  produtos.setValor(30);
+      //  produtos.setId(1);
+      //  updateProdutos(produtos);
+
+       // Funcionario funcionario = new Funcionario();
+       // funcionario.setNome("New Funcionario");
+       // funcionario.setTelefone("New Telefone");
+       // funcionario.setEndereco("New Endereço");
+       // funcionario.setId(1);
+       // updateFuncionario(funcionario);
+
+        //  Perfil perfil = new Perfil();
+      //  perfil.setId(2);
+      //  perfil.setNome("Novo nome");
+      //  perfil.setLogin("Novo Login");
+      //  perfil.setSenha("Nova Senha");
+      //  updatePerfil(perfil);
+
+      //  INSERT insert = new INSERT();
 
       //  Perfil perfil = new Perfil();
       //  perfil.setNome("Daniel Macedo");
