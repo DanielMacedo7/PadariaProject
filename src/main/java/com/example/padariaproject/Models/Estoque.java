@@ -5,6 +5,10 @@ public class Estoque {
     private int id;
     private int id_produto;
 
+    public Estoque(){
+
+    }
+
     public Estoque(int id, int id_produto) {
         this.id = id;
         this.id_produto = id_produto;

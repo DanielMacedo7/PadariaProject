@@ -7,6 +7,9 @@ public class Funcionario {
     private String telefone;
     private String endereco;
 
+    public Funcionario(){
+
+    }
     public Funcionario(int id, String nome, String telefone, String endereco) {
         this.id = id;
         this.nome = nome;

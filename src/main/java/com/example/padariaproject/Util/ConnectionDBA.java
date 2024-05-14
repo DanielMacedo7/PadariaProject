@@ -26,7 +26,28 @@ public class ConnectionDBA{
 
     // Método para fechar conexão, fecha também a interface que executa instruções SQL e
     // ResultSet que vai servir para buscar todos os nossos dados do objeto
-    public static void closeConnection(Connection connection, PreparedStatement statement, ResultSet resultSet) {
+    public static void closeConnection(Connection connection, PreparedStatement statement) {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao fechar conexão");
+        }
+
+        try{
+            if(statement != null){
+                statement.close();
+            }
+        }catch (SQLException e){
+            throw new RuntimeException("", e);
+        }
+
+
+
+    }
+
+    public static void closeConnection2(Connection connection, PreparedStatement statement, ResultSet resultSet) {
         try {
             if (connection != null) {
                 connection.close();
@@ -51,7 +72,10 @@ public class ConnectionDBA{
             throw new RuntimeException("", e);
         }
 
+
     }
+
+
 
 
 

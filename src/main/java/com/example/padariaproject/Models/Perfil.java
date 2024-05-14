@@ -7,6 +7,9 @@ public class Perfil {
     private String login;
     private String senha;
 
+    public Perfil(){
+
+    }
     public Perfil(int id, String nome, String login, String senha) {
         this.id = id;
         this.nome = nome;
