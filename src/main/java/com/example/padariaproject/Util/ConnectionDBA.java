@@ -61,7 +61,7 @@ public class ConnectionDBA{
                 statement.close();
             }
         }catch (SQLException e){
-            throw new RuntimeException("", e);
+            throw new RuntimeException("Erro ao fechar statement", e);
         }
 
         try{
@@ -69,7 +69,7 @@ public class ConnectionDBA{
                 resultSet.close();
             }
         }catch (SQLException e){
-            throw new RuntimeException("", e);
+            throw new RuntimeException("Erro ao fechar ResultSet", e);
         }
 
 

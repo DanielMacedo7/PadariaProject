@@ -33,4 +33,14 @@ public class Estoque {
     public void setId_produto(int id_produto) {
         this.id_produto = id_produto;
     }
+
+    @Override
+    public String toString() {
+        return "Estoque{" +
+                "id=" + id +
+                ", id_produto=" + id_produto +
+                '}';
+
+    }
 }
+

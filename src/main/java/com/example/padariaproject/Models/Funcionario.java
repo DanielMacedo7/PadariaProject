@@ -49,4 +49,14 @@ public class Funcionario {
         this.endereco = endereco;
     }
 
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", endereco='" + endereco + '\'' +
+                '}';
+    }
 }

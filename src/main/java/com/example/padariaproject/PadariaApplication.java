@@ -4,6 +4,7 @@ import com.example.padariaproject.Models.Estoque;
 import com.example.padariaproject.Models.Funcionario;
 import com.example.padariaproject.Models.Perfil;
 import com.example.padariaproject.Models.Produtos;
+import com.example.padariaproject.Queries.DELETE;
 import com.example.padariaproject.Queries.INSERT;
 import com.example.padariaproject.Queries.UPDATE;
 import javafx.application.Application;
@@ -15,9 +16,13 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
+import static com.example.padariaproject.Queries.DELETE.*;
 import static com.example.padariaproject.Queries.INSERT.*;
+import static com.example.padariaproject.Queries.SELECT.*;
 import static com.example.padariaproject.Queries.UPDATE.*;
+
 
 public class PadariaApplication extends Application {
 
@@ -32,7 +37,31 @@ public class PadariaApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        UPDATE update = new UPDATE();
+        // através do método toString ele retorna todos os dados do banco em um array
+        // para testar o find vamos criar uma variavel da lista e chamar o método para ela.
+        List<Perfil> perfilList = perfilfindAll(1);
+        System.out.println("Perfil " + perfilList);
+
+        List<Funcionario> funcionarioList = funcionariofindAll();
+        System.out.println("Funcionarios: " + funcionarioList);
+
+        List<Produtos> produtosList = produtosfindAll();
+        System.out.println("Produtos: " + produtosList);
+
+        List<Estoque> estoqueList = estoquefindAll(3);
+        System.out.println("Estoque: " + estoqueList);
+
+      //  Funcionario funcionario = new Funcionario();
+      //  funcionario.setId(1);
+      //  deleteFuncionario(funcionario);
+
+      //   Produtos produtos = new Produtos();
+      //   produtos.setId(1);
+      //   deleteProdutos(produtos);
+
+      //     Estoque estoque = new Estoque();
+      //     estoque.setId(1);
+      //     deleteEstoque(estoque);
 
 
         // 1 - vamos testar o update de Funcionario por que o de perfil já está funcionando.
@@ -62,14 +91,13 @@ public class PadariaApplication extends Application {
        // funcionario.setId(1);
        // updateFuncionario(funcionario);
 
-        //  Perfil perfil = new Perfil();
+      //  Perfil perfil = new Perfil();
       //  perfil.setId(2);
       //  perfil.setNome("Novo nome");
       //  perfil.setLogin("Novo Login");
       //  perfil.setSenha("Nova Senha");
       //  updatePerfil(perfil);
 
-      //  INSERT insert = new INSERT();
 
       //  Perfil perfil = new Perfil();
       //  perfil.setNome("Daniel Macedo");
@@ -77,22 +105,22 @@ public class PadariaApplication extends Application {
       //  perfil.setSenha("Astro@99");
       //  savePerfil(perfil);
 
-      // Funcionario funcionario = new Funcionario();
-      //  funcionario.setNome("Daniel");
-      //  funcionario.setEndereco("Rodovia Prefeito Joao Sampaio");
-      //  funcionario.setTelefone("123456789");
-      //  saveFuncionario(funcionario);
+   //    Funcionario funcionario = new Funcionario();
+   //    funcionario.setNome("Daniel");
+   //    funcionario.setEndereco("Rodovia Prefeito Joao Sampaio");
+   //    funcionario.setTelefone("123456789");
+   //    saveFuncionario(funcionario);
 
-      //  Produtos produtos = new Produtos();
-      //  produtos.setNome("");
-      //  produtos.setPrazo(new Date());
-      //  produtos.setCategoria("Frios");
-      //  produtos.setValor(99.0f);
-      //  saveProdutos(produtos);
+     //  Produtos produtos = new Produtos();
+     //  produtos.setNome("Queijo");
+     //  produtos.setPrazo(new Date());
+     //  produtos.setCategoria("Frios");
+     //  produtos.setValor(99.0f);
+     //  saveProdutos(produtos);
 
-      //  Estoque estoque = new Estoque();
-      //  estoque.setId_produto(1);
-      //  saveEstoque(estoque);
+     //   Estoque estoque = new Estoque();
+     //   estoque.setId_produto(3);
+     //   saveEstoque(estoque);
     }
 
     public static void setRoot(String fxml) throws IOException {

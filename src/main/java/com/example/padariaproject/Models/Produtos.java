@@ -61,4 +61,16 @@ public class Produtos {
         this.valor = valor;
     }
 
+    @Override
+    public String toString() {
+        return "Produtos{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", prazo=" + prazo +
+                ", categoria='" + categoria + '\'' +
+                ", valor=" + valor +
+                '}';
+    }
+
+
 }

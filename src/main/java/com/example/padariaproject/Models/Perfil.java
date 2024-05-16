@@ -49,4 +49,15 @@ public class Perfil {
         this.senha = senha;
     }
 
+
+    @Override
+    public String toString() {
+        return "Perfil{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                '}';
+    }
+
 }
