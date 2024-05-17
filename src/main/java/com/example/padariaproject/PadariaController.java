@@ -4,27 +4,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+
 public class PadariaController implements Initializable {
 
-    @FXML
-    private Hyperlink si_hyperlink;
+    private static Scene scene;
 
-    @FXML
-    private TextField si_login;
-
-    @FXML
-    private Button si_loginbtn;
-
-    @FXML
-    private PasswordField si_password;
 
     @FXML
     private Button btnPerfil;
@@ -62,6 +60,7 @@ public class PadariaController implements Initializable {
 
     @FXML
     private AnchorPane paneprodutos;
+
 
 
     private void loadList(){
@@ -111,6 +110,10 @@ public class PadariaController implements Initializable {
 
     }
 
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(PadariaApplication.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
 
 
     @Override
