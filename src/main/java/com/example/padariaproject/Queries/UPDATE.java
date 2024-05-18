@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 public class UPDATE {
 
+
     public static void updatePerfil(Perfil perfil){
 
         Connection connection = null;
@@ -22,7 +23,7 @@ public class UPDATE {
                 "nome = ?," +
                 " login = ?," +
                 " senha = ? " +
-                " WHERE ID = ?";
+                " WHERE id = ?";
 
         try{
             connection = ConnectionDBA.getConnection();
@@ -31,7 +32,7 @@ public class UPDATE {
             statement.setString(1, perfil.getNome());
             statement.setString(2, perfil.getLogin());
             statement.setString(3, perfil.getSenha());
-            statement.setInt(4 , perfil.getId());
+            statement.setInt(4, perfil.getId());
             statement.execute();
 
 

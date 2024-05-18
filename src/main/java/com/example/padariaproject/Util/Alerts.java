@@ -26,5 +26,14 @@ public class Alerts {
         return Arrays.stream(args).allMatch(arg -> arg == null || arg.isEmpty());
     }
 
+    public static boolean checkTextFields2 (String... Fields) {
+       for(String field : Fields){
+           System.out.println("Check fields: " + field);
+           if(field == null || field.trim().isEmpty()){
+           return false;
+           }
+       }
+       return true;
+    }
 
 }
