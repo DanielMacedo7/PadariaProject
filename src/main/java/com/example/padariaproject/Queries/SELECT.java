@@ -17,43 +17,29 @@ public class SELECT {
 
     // só é necessário passar como parâmetro um id se for fazer find by id .
     // nesse caso como teremos apenas um perfil iremos fazer um findby id.
-    public static List <Perfil> perfilfindAll(int id){
 
-        String sql = "SELECT * FROM Perfil WHERE id = ?";
-
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-
-        List <Perfil> perfils = new ArrayList<>();
-
-        try{
-
-        connection = ConnectionDBA.getConnection();
-        statement = connection.prepareStatement(sql);
-        statement.setInt(1, id);
-        resultSet = statement.executeQuery(); // para trazer todos os dados da nossa consulta.
-
-        while(resultSet.next()) {
-
-        Perfil perfil = new Perfil();
-        perfil.setId(resultSet.getInt("id"));
-        perfil.setNome(resultSet.getString("nome"));
-        perfil.setLogin(resultSet.getString("login"));
-        perfil.setSenha(resultSet.getString("senha"));
-        perfils.add(perfil);
-
+    //FindBylogin para procurar fazer login na tela.
+    public static Perfil findPerfilByLogin(String login) {
+        Perfil perfil = null;
+        String sql = "SELECT id, nome, login, senha FROM Perfil WHERE login = ?";
+        try (Connection conn = ConnectionDBA.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+             statement.setString(1, login);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    perfil = new Perfil();
+                    perfil.setId(resultSet.getInt("id"));
+                    perfil.setNome(resultSet.getString("nome"));
+                    perfil.setLogin(resultSet.getString("login"));
+                    perfil.setSenha(resultSet.getString("senha"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        return perfils;
-
-        }catch(SQLException e){
-            throw new RuntimeException("Erro ao Listar Perfil" + e.getMessage() + e);
-        }finally {
-            ConnectionDBA.closeConnection2(connection, statement, resultSet);
-        }
-
+        return perfil;
     }
+
 
     public static List<Funcionario> funcionariofindAll(){
 

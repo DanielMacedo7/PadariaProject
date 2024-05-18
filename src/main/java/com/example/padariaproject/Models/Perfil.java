@@ -1,5 +1,7 @@
 package com.example.padariaproject.Models;
 
+import java.util.Objects;
+
 // ID, NOME , LOGIN E SENHA
 public class Perfil {
     private int id;
@@ -60,4 +62,16 @@ public class Perfil {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Perfil perfil = (Perfil) o;
+        return id == perfil.id && Objects.equals(nome, perfil.nome) && Objects.equals(login, perfil.login) && Objects.equals(senha, perfil.senha);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, login, senha);
+    }
 }

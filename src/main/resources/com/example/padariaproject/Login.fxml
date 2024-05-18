@@ -23,8 +23,8 @@
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <Button fx:id="si_loginbtn" layoutX="39.0" layoutY="305.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="210.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="Login" />
                   <PasswordField fx:id="si_password" layoutX="42.0" layoutY="203.0" prefHeight="35.0" prefWidth="204.0" promptText="Senha" stylesheets="@Styles/NewCss.css" />
+                  <Button fx:id="si_loginbtn" layoutX="39.0" layoutY="305.0" mnemonicParsing="false" onAction="#Login" prefHeight="43.0" prefWidth="210.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="Login" />
                   <Hyperlink fx:id="si_hyperlink" layoutX="39.0" layoutY="269.0" onAction="#clickHyperlink" prefHeight="23.0" prefWidth="224.0" text="Já possui cadastro? se não, clique aqui!!" />
                </children>
             </AnchorPane>

@@ -25,7 +25,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="paneperfil" layoutX="262.0" layoutY="48.0" prefHeight="352.0" prefWidth="331.0" stylesheets="@Styles/NewCss.css" visible="false">
+                        <AnchorPane fx:id="paneperfil" layoutX="262.0" layoutY="48.0" prefHeight="352.0" prefWidth="331.0" stylesheets="@Styles/NewCss.css">
                            <styleClass>
                               <String fx:value="shadow" />
                               <String fx:value="white-bg" />
@@ -33,8 +33,10 @@
                            </styleClass>
                            <children>
                               <FontAwesomeIcon fill="#4ebd24" glyphName="USER" layoutX="28.0" layoutY="65.0" size="5em" />
-                              <TextField layoutX="88.0" layoutY="132.0" prefHeight="33.0" prefWidth="200.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
-                              <TextField layoutX="87.0" layoutY="197.0" prefHeight="33.0" prefWidth="203.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="pe_id" layoutX="90.0" layoutY="86.0" prefHeight="33.0" prefWidth="200.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" visible="false" />
+                              <TextField fx:id="pe_fieldname" layoutX="90.0" layoutY="134.0" prefHeight="33.0" prefWidth="200.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="pe_fieldlogin" layoutX="87.0" layoutY="197.0" prefHeight="33.0" prefWidth="203.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <PasswordField fx:id="pe_fieldpassword" layoutX="87.0" layoutY="252.0" prefHeight="34.0" prefWidth="206.0" />
                               <Label layoutX="121.0" layoutY="34.0" prefHeight="17.0" prefWidth="114.0" styleClass="head-label" stylesheets="@Styles/NewCss.css" text="Perfil">
                                  <font>
                                     <Font size="22.0" />
@@ -55,13 +57,12 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="116.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" stylesheets="@Styles/NewCss.css" text="Salvar Alteração">
+                              <Button fx:id="pe_btnupdate" layoutX="104.0" layoutY="313.0" mnemonicParsing="false" onAction="#atualizaPerfil" prefHeight="25.0" prefWidth="152.0" stylesheets="@Styles/NewCss.css" text="Salvar Alteração">
                                  <styleClass>
                                     <String fx:value="shadow" />
                                     <String fx:value="radius" />
                                  </styleClass>
                               </Button>
-                              <PasswordField layoutX="87.0" layoutY="259.0" prefHeight="27.0" prefWidth="206.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="paneestoque" layoutX="10.0" layoutY="3.0" prefHeight="494.0" prefWidth="800.0" visible="false">
@@ -176,7 +177,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="paneInicio" prefHeight="483.0" prefWidth="800.0">
+                        <AnchorPane fx:id="paneInicio" prefHeight="483.0" prefWidth="800.0" visible="false">
                            <children>
                               <AnchorPane layoutX="555.0" layoutY="14.0" prefHeight="242.0" prefWidth="210.0" stylesheets="@Styles/NewCss.css">
                                  <styleClass>

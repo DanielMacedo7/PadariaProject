@@ -1,5 +1,8 @@
 package com.example.padariaproject;
 
+import com.example.padariaproject.Models.Perfil;
+import com.example.padariaproject.Util.Alerts;
+import com.example.padariaproject.Util.PerfilSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,12 +20,33 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.padariaproject.Queries.UPDATE.updatePerfil;
 
 
 public class PadariaController implements Initializable {
 
     private static Scene scene;
 
+    // Tudo da Aba Perfil.
+    @FXML
+    private Button pe_btnupdate;
+
+    @FXML
+    private TextField pe_id;
+
+    @FXML
+    private TextField pe_fieldlogin;
+
+    @FXML
+    private TextField pe_fieldname;
+
+    @FXML
+    private PasswordField pe_fieldpassword;
+
+    @FXML
+    private AnchorPane paneperfil;
+
+    //////////////////////////////////////////
 
     @FXML
     private Button btnPerfil;
@@ -44,9 +68,6 @@ public class PadariaController implements Initializable {
 
     @FXML
     private ListView<String> listview;
-
-    @FXML
-    private AnchorPane paneperfil;
 
 
     @FXML
@@ -110,6 +131,41 @@ public class PadariaController implements Initializable {
 
     }
 
+    //método para atualizar o perfil que está sendo carregado.
+    @FXML
+    private void atualizaPerfil(ActionEvent event) {
+        String id = pe_id.getText();
+        String nome = pe_fieldname.getText();
+        String login = pe_fieldlogin.getText();
+        String password = pe_fieldpassword.getText();
+        Perfil perfil = PerfilSession.getPerfil();
+
+        if (perfil != null) {
+            if (!Alerts.checkTextFields2(id, nome, login, password)) {
+                Alerts.showAlert("Erro", "Preencha os Campos para salvar Alteracao");
+            } else {
+                perfil.setId(Integer.parseInt(id));
+                perfil.setNome(nome);
+                perfil.setLogin(login);
+                perfil.setSenha(password);
+                updatePerfil(perfil);
+                Alerts.showAlertSucess("Sucesso!", "Perfil atualizado com Sucesso!");
+            }
+        }
+    }
+
+    //método para carregar os atributos de perfil nos textfields de perfil.
+    private void loadPerfil(){
+    Perfil perfil = PerfilSession.getPerfil();
+    if(perfil != null) {
+        pe_id.setText(String.valueOf(perfil.getId()));
+        pe_fieldname.setText(perfil.getNome());
+        pe_fieldlogin.setText(perfil.getLogin());
+        pe_fieldpassword.setText(perfil.getSenha());
+    }
+
+    }
+
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PadariaApplication.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
@@ -120,6 +176,7 @@ public class PadariaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     // precisamos converter para observablelist para setar os items
     loadList();
+    loadPerfil();
 
     }
 
