@@ -1,5 +1,7 @@
 # Projeto PadariaApp da Disciplina extensiva de Java Orientada a Objetos
 ### estou criando esse read.me para anexar fotos do sistema e uma documentação que será criada no final dessa disciplina, documentação esses referente a todo o sistema.
 
-### Stacks utilizadas até agora: Java, JavaFX e CSS.
-### Logo menos estará com a implementação do SGBD PostgreSQL ou PhPMyAdmin
+### Stacks utilizadas até agora: Java, JDBC, JavaFX e CSS.
+### Integração com o banco de dados ✅
+### Queries implementadas e testadas ✅
+### Implementação dos eventos de Troca de abas / Acionar painel de Registro / Registro / Efetuar Login / Carregar um Perfil na aba Perfil e Poder atualizar esse Perfil. ✅
