@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public class Alerts {
 
@@ -21,9 +22,12 @@ public class Alerts {
         alert.showAndWait();
     }
 
-    // Para fazer checagem de textfields ou qualquer tipo de campo vazio.
-    public static boolean checkTextFields (String... args) {
-        return Arrays.stream(args).allMatch(arg -> arg == null || arg.isEmpty());
+    public static Optional<ButtonType> AlertaConfirmacao(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        return alert.showAndWait();
     }
 
     public static boolean checkTextFields2 (String... Fields) {

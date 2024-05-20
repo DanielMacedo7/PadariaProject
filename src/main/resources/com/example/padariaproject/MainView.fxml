@@ -25,7 +25,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="paneperfil" layoutX="262.0" layoutY="48.0" prefHeight="352.0" prefWidth="331.0" stylesheets="@Styles/NewCss.css">
+                        <AnchorPane fx:id="paneperfil" layoutX="262.0" layoutY="48.0" prefHeight="352.0" prefWidth="331.0" stylesheets="@Styles/NewCss.css" visible="false">
                            <styleClass>
                               <String fx:value="shadow" />
                               <String fx:value="white-bg" />
@@ -177,7 +177,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="paneInicio" prefHeight="483.0" prefWidth="800.0" visible="false">
+                        <AnchorPane fx:id="paneInicio" prefHeight="483.0" prefWidth="800.0">
                            <children>
                               <AnchorPane layoutX="555.0" layoutY="14.0" prefHeight="242.0" prefWidth="210.0" stylesheets="@Styles/NewCss.css">
                                  <styleClass>
@@ -381,7 +381,7 @@
                            <graphic>
                               <FontAwesomeIcon fill="#fffefe" glyphName="USER" size="2em" text="" />
                            </graphic></Button>
-                        <Button fx:id="btnback" layoutX="756.0" layoutY="66.0" mnemonicParsing="false" onAction="#BackSystem" prefHeight="40.0" prefWidth="33.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" textFill="#366f43">
+                        <Button fx:id="btnback" layoutX="756.0" layoutY="66.0" mnemonicParsing="false" onAction="#returnToLogin" prefHeight="40.0" prefWidth="33.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" textFill="#366f43">
                            <graphic>
                               <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" size="2em" />
                            </graphic>

@@ -14,10 +14,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static com.example.padariaproject.Queries.UPDATE.updatePerfil;
@@ -91,8 +93,28 @@ public class PadariaController implements Initializable {
     }
 
     @FXML
-    private void BackSystem(){
-        System.exit(0);
+    private void returnToLogin(ActionEvent Event) throws IOException {
+       BackSystem("Login");
+
+    }
+
+    @FXML
+    private void BackSystem(String file) throws IOException{
+       Optional <ButtonType> question = Alerts.AlertaConfirmacao("Alerta", " tem certeza que deseja sair?");
+
+       if(question.get().equals(ButtonType.OK)) {
+           btnback.getScene().getWindow().hide();
+       }
+
+        Parent root =  FXMLLoader.load(PadariaApplication.class.getResource(file + ".fxml"));
+        Stage stage = new Stage(); // controla tudo
+        Scene scene = new Scene(root, 600, 400); // apenas a cena
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setMaximized(false);
+        stage.setScene(scene);
+        stage.show();
+
+
     }
 
     @FXML
