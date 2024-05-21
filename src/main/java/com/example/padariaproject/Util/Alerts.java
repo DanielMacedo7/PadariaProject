@@ -6,6 +6,8 @@ import javafx.scene.control.ButtonType;
 import java.util.Arrays;
 import java.util.Optional;
 
+// Classe para emitir alertas nas telas
+
 public class Alerts {
 
     public static void showAlert(String title, String message) {
