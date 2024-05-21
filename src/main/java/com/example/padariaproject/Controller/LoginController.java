@@ -1,6 +1,7 @@
-package com.example.padariaproject;
+package com.example.padariaproject.Controller;
 
 import com.example.padariaproject.Models.Perfil;
+import com.example.padariaproject.PadariaApplication;
 import com.example.padariaproject.Util.Alerts;
 import com.example.padariaproject.Util.ConnectionDBA;
 import com.example.padariaproject.Util.PerfilSession;
@@ -17,6 +18,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static com.example.padariaproject.Queries.INSERT.savePerfil;
@@ -25,6 +27,9 @@ import static com.example.padariaproject.Queries.SELECT.findPerfilByLogin;
 
 public class LoginController implements Initializable {
 
+    //Tudo sobre Login
+    @FXML
+    private Button btnbacklogin;
 
     @FXML
     private Hyperlink si_hyperlink;
@@ -37,8 +42,10 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField si_password;
+    //////////////////////////////////
 
 
+    //Tudo sobre Registro
     @FXML
     private Button re_btnclear;
 
@@ -53,10 +60,10 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField re_password;
+    /////////////////////////////////
 
-    // Da linha 54 até 138 são eventos do painel de registro.
 
-    // Clear REGISTER
+    //Método para limpar os campos de registro.
     @FXML
     private void clearRegister(){
         re_name.clear();
@@ -65,7 +72,7 @@ public class LoginController implements Initializable {
 
     }
 
-    // Save REGISTER
+    //Implementação do evento de salvar um registro.
     @FXML
     private void saveRegister(ActionEvent event){
 
@@ -101,6 +108,19 @@ public class LoginController implements Initializable {
 
     }
 
+    //Recebe um aviso e depois se OK fecha o sistema completamente
+    @FXML
+    private void SystemExit(ActionEvent event){
+        Optional<ButtonType> question = Alerts.AlertaConfirmacao("Alerta", " tem certeza que deseja sair?");
+
+        if(question.get().equals(ButtonType.OK)) {
+            System.exit(0);
+
+        }
+
+    }
+
+
 
     //ao clicar no hyperlink você carrega a tela de registro.
     @FXML
@@ -113,7 +133,7 @@ public class LoginController implements Initializable {
     }
 
 
-    // método para carregar tela de registro
+    //Implementação do método para carregar a tela de registro.
     @FXML
     private void loadJDialog(String file) throws IOException {
         Parent root = FXMLLoader.load(PadariaApplication.class.getResource(file + ".fxml"));
@@ -126,7 +146,8 @@ public class LoginController implements Initializable {
         si_hyperlink.getScene().getWindow().hide();
     }
 
-    //método para carregar tela de login após terminar de fazer um registro.
+
+    //Implementação do método para carregar a tela de login
     @FXML
     private void loadLogin(String file) throws IOException {
         Parent root = FXMLLoader.load(PadariaApplication.class.getResource(file + ".fxml"));
@@ -140,8 +161,7 @@ public class LoginController implements Initializable {
     }
 
 
-    // a partir daqui começam os eventos do login.
-
+    //Evento para efetuar login e carregar as informações do login.
     @FXML
     private void Login(ActionEvent event) throws IOException {
 
@@ -165,7 +185,7 @@ public class LoginController implements Initializable {
     }
 
 
-    // método para carregar MainView
+    //Implementação do método para carregar a MainView
     @FXML
     private void loadMainView(String file) throws IOException {
         Parent root = FXMLLoader.load(PadariaApplication.class.getResource(file + ".fxml"));
