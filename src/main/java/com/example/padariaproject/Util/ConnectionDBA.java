@@ -10,7 +10,7 @@ public class ConnectionDBA{
     //essa classe só irá conter métodos estáticos para não haver a necessidade de instacia-los.
 
     // 3 ATRIBUTOS PRINCIPAIS PARA FAZER ESSA INTEGRAÇÃO COM O BANCO DE DADOS
-    public static final String URL = "jdbc:postgresql://localhost:5432/PadariaApp";
+    public static final String URL = "jdbc:postgresql://localhost:5433/PadariaApp";
     public static final String USER = "postgres";
     public static final String PASS = "root";
 
@@ -25,7 +25,7 @@ public class ConnectionDBA{
     }
 
     // Método para fechar conexão, fecha também a interface que executa instruções SQL e
-    // ResultSet que vai servir para buscar todos os nossos dados do objeto
+
     public static void closeConnection(Connection connection, PreparedStatement statement) {
         try {
             if (connection != null) {
@@ -47,6 +47,8 @@ public class ConnectionDBA{
 
     }
 
+    // ResultSet que vai servir para buscar todos os nossos dados do objeto
+    //Método para fechar conexão fechando : Conn, statement e resultset.
     public static void closeConnection2(Connection connection, PreparedStatement statement, ResultSet resultSet) {
         try {
             if (connection != null) {
