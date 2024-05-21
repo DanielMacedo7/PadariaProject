@@ -5,3 +5,4 @@
 ### Integração com o banco de dados ✅
 ### Queries implementadas e testadas ✅
 ### Implementação dos eventos de Troca de abas / Acionar painel de Registro / Registro / Efetuar Login / Carregar um Perfil na aba Perfil e Poder atualizar esse Perfil. ✅
+### Implementação dos eventos de Hyperlink da tela de inicio / Carregamento dos dados na TableView / Botão de sair completamente do sistema na tela de login. ✅
