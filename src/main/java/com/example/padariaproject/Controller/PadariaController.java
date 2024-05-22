@@ -4,7 +4,9 @@ import com.example.padariaproject.Models.Funcionario;
 import com.example.padariaproject.Models.Perfil;
 import com.example.padariaproject.Models.Produtos;
 import com.example.padariaproject.PadariaApplication;
+import com.example.padariaproject.Queries.DELETE;
 import com.example.padariaproject.Util.Alerts;
+import com.example.padariaproject.Util.OpenWebInDesktop;
 import com.example.padariaproject.Util.PerfilSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,13 +27,20 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static com.example.padariaproject.Queries.DELETE.deleteFuncionario;
+import static com.example.padariaproject.Queries.INSERT.saveFuncionario;
+import static com.example.padariaproject.Queries.INSERT.saveProdutos;
 import static com.example.padariaproject.Queries.SELECT.funcionariofindAll;
 import static com.example.padariaproject.Queries.SELECT.produtosfindAll;
-import static com.example.padariaproject.Queries.UPDATE.updatePerfil;
+import static com.example.padariaproject.Queries.UPDATE.*;
+import static com.example.padariaproject.Util.ConversionDate.converterData;
+import static com.example.padariaproject.Util.ConversionDate.formatarData;
+import static com.example.padariaproject.Util.OpenWebInDesktop.OpenWebPage;
 
 
 public class PadariaController implements Initializable {
@@ -80,6 +89,31 @@ public class PadariaController implements Initializable {
     @FXML
     TableColumn tb_endereco;
 
+    @FXML
+    TextField txtfuncionome;
+
+    @FXML
+    TextField txtfunciotelefone;
+
+    @FXML
+    TextField txtfuncioendereco;
+
+    @FXML
+    TextField txtfuncioid;
+
+    @FXML
+    Button btnadicionarfun;
+
+    @FXML
+    Button btnlimparfun;
+
+    @FXML
+    Button btnupdatefun;
+
+    @FXML
+    Button btndeletarfun;
+
+
     ////////////////////////////////////////////
 
 
@@ -104,6 +138,39 @@ public class PadariaController implements Initializable {
 
     @FXML
     TableColumn tb_produtosvalor;
+
+    @FXML
+    TextField txtprodutosid;
+
+    @FXML
+    TextField txtprodutosnome;
+
+    @FXML
+    TextField txtprodutosprazo;
+
+
+    @FXML
+    TextField txtprodutoscategoria;
+
+
+    @FXML
+    TextField txtprodutosvalor;
+
+    @FXML
+    Button btnadicionarprodutos;
+
+    @FXML
+    Button btnlimparprodutos;
+
+    @FXML
+    Button btnatualizarprodutos;
+
+    @FXML
+    Button btndeletarprodutos;
+
+
+
+
 
     /////////////////////////////////
 
@@ -152,7 +219,17 @@ public class PadariaController implements Initializable {
 
 
 
+    //método para carregar os atributos de perfil nos textfields de perfil.
+    private void loadPerfil(){
+        Perfil perfil = PerfilSession.getPerfil();
+        if(perfil != null) {
+            pe_id.setText(String.valueOf(perfil.getId()));
+            pe_fieldname.setText(perfil.getNome());
+            pe_fieldlogin.setText(perfil.getLogin());
+            pe_fieldpassword.setText(perfil.getSenha());
+        }
 
+    }
 
 
     //Método para carregar funcionarios na TableView
@@ -196,16 +273,16 @@ public class PadariaController implements Initializable {
        if(question.get().equals(ButtonType.OK)) {
            btnback.getScene().getWindow().hide();
 
+           // carrega a tela de login caso o clique botão OK.
+           Parent root = FXMLLoader.load(PadariaApplication.class.getResource(file + ".fxml"));
+           Stage stage = new Stage(); // controla tudo
+           Scene scene = new Scene(root, 600, 400); // apenas a cena
+           stage.initStyle(StageStyle.TRANSPARENT);
+           stage.setMaximized(false);
+           stage.setScene(scene);
+           stage.show();
+
        }
-
-        Parent root =  FXMLLoader.load(PadariaApplication.class.getResource(file + ".fxml"));
-        Stage stage = new Stage(); // controla tudo
-        Scene scene = new Scene(root, 600, 400); // apenas a cena
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setMaximized(false);
-        stage.setScene(scene);
-        stage.show();
-
 
     }
 
@@ -269,23 +346,7 @@ public class PadariaController implements Initializable {
         }
     }
 
-    //método para carregar os atributos de perfil nos textfields de perfil.
-    private void loadPerfil(){
-    Perfil perfil = PerfilSession.getPerfil();
-    if(perfil != null) {
-        pe_id.setText(String.valueOf(perfil.getId()));
-        pe_fieldname.setText(perfil.getNome());
-        pe_fieldlogin.setText(perfil.getLogin());
-        pe_fieldpassword.setText(perfil.getSenha());
-    }
-
-    }
-
-    // método para carregar os XMLS..
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PadariaApplication.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
+    //310 até 338 métodos para abrir o navegador na url ordenada via hyperlink na interface.
 
     //Evento de abrir github atráves de um hyperlink no destkop.
     @FXML
@@ -315,27 +376,46 @@ public class PadariaController implements Initializable {
 
     }
 
+    // 340 até 370 Preencher TxtFields das abas de Funcionario e Produtos.
 
-    // classe Desktop permite a interação do navegador com destkop
-    // a validação + getDesktop() garante que só funcione o método se suportar a interação
+    //Implementação do método para clicar em um elemento na tableview e carregar os textfields de funcionarios
+    @FXML
+    private void PreencherFieldsFuncionarios(){
+        Funcionario funcionario = tb_funcionarios.getSelectionModel().getSelectedItem();
+        int y = tb_funcionarios.getSelectionModel().getSelectedIndex();
 
-    //Implementação do Método para abrir páginas Web atráves de HiperLinks
-    private void OpenWebPage(URI uri){
+        int pass = funcionario.getId();
+        String receive = String.valueOf(pass);
 
-        if(Desktop.isDesktopSupported()){
-        Desktop desktop = Desktop.getDesktop();
-
-        try{
-            desktop.browse(uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        }else{
-            System.out.println("Erro ao abrir url");
-        }
+        if(y == -1) return;
+        txtfuncioid.setText(receive);
+        txtfuncionome.setText(funcionario.getNome());
+        txtfunciotelefone.setText(funcionario.getTelefone());
+        txtfuncioendereco.setText(funcionario.getEndereco());
 
     }
+
+    //Implementação do método para clicar em um elemento na tableview e carregar os textfields de produtos
+    @FXML
+    private void PreencherFieldsProdutos(){
+        Produtos produtos = tb_produtos.getSelectionModel().getSelectedItem();
+        int x = tb_produtos.getSelectionModel().getSelectedIndex();
+
+        float passvalor = produtos.getValor();// precisamos carregar o valor do produto nessa variável pois é float
+        String receive = String.valueOf(passvalor); // e depois converter para string para carregar no campo.
+
+        int passid = produtos.getId();
+        String receiveid = String.valueOf(passid);
+
+        if(x == -1) return; // validação para checar se o indice for = - 1 então não existe algo selecionado
+        txtprodutosid.setText(receiveid);
+        txtprodutosnome.setText(produtos.getNome());
+        txtprodutosprazo.setText(produtos.getPrazo().toString());
+        txtprodutoscategoria.setText(produtos.getCategoria());
+        txtprodutosvalor.setText(receive);
+    }
+
+
 
 
     //Inicialização das tableView
@@ -355,12 +435,178 @@ public class PadariaController implements Initializable {
     }
 
 
+    //Métodos para limpar txtfields nas Screens de Funcionarios e Produtos.
+    public void ClearFieldsFuncionarios(){
+        txtfuncionome.clear();
+        txtfunciotelefone.clear();
+        txtfuncioendereco.clear();
+
+    }
+
+    public void ClearFieldsProdutos(){
+        txtprodutosnome.clear();
+        txtprodutosprazo.clear();
+        txtprodutoscategoria.clear();
+        txtprodutosvalor.clear();
+    }
+
+
+    // Método para Atualizar um Registro na TableView
+    @FXML
+    private void updateFuncionarioEvt(ActionEvent event) {
+        String id = txtfuncioid.getText();
+        String nome = txtfuncionome.getText();
+        String telefone = txtfunciotelefone.getText();
+        String endereco = txtfuncioendereco.getText();
+        Funcionario funcionario = tb_funcionarios.getSelectionModel().getSelectedItem();
+
+        if(funcionario != null) {
+            if (!Alerts.checkTextFields2(id, nome, telefone, endereco)) {
+                Alerts.showAlert("Erro", "por favor preencha os campos necessários");
+            }else {
+
+                funcionario.setId(Integer.parseInt(id));
+                funcionario.setNome(nome);
+                funcionario.setTelefone(telefone);
+                funcionario.setEndereco(endereco);
+                updateFuncionario(funcionario);
+
+                tb_funcionarios.refresh();
+
+            }
+
+        }
+    }
+
+
+    //Método para criar um Registro na TableView
+    @FXML
+    private void saveFuncionarioEvt(ActionEvent event){
+        String nome = txtfuncionome.getText();
+        String telefone = txtfunciotelefone.getText();
+        String endereco = txtfuncioendereco.getText();
+        Funcionario funcionario = new Funcionario();
+
+        if(!Alerts.checkTextFields2(nome, telefone, endereco)){
+            Alerts.showAlert("Erro" ,"por favor preencha os campos necessários");
+        }
+
+        funcionario.setNome(nome);
+        funcionario.setTelefone(telefone);
+        funcionario.setEndereco(endereco);
+        saveFuncionario(funcionario);
+
+        tb_funcionarios.getItems().add(funcionario);
+
+
+
+    }
+
+    //Método para apagar um Registro da TableView.
+    @FXML
+    private void deleteFuncionarioEvt(ActionEvent event) {
+
+        Funcionario funcionario = tb_funcionarios.getSelectionModel().getSelectedItem();
+        if (funcionario != null)
+            deleteFuncionario(funcionario);
+        tb_funcionarios.getItems().remove(funcionario);
+        tb_funcionarios.refresh();
+
+    }
+
+    //Método para criar um registro na TableView de Produtos.
+    @FXML
+    private void saveProdutosEvt(ActionEvent event){
+    String nome = txtprodutosnome.getText();
+    String prazo = txtprodutosprazo.getText();
+    String categoria = txtprodutoscategoria.getText();
+    String valor = txtprodutosvalor.getText();
+    Produtos produtos = new Produtos();
+
+    if(!Alerts.checkTextFields2(nome, prazo, categoria, valor)){
+        Alerts.showAlert("Erro", "por favor preencha os campos necessários.");
+    }
+
+    float x = Float.parseFloat(valor);
+
+    Date getTime = converterData(prazo);
+    ;
+    if(getTime == null){
+        Alerts.showAlert("Erro", "Formato de Data Inválida.");
+    }
+
+    String newDate = formatarData(getTime);
+
+    produtos.setNome(nome);
+    produtos.setPrazo(getTime);
+    produtos.setCategoria(categoria);
+    produtos.setValor(x);
+    saveProdutos(produtos);
+
+
+    tb_produtos.getItems().add(produtos);
+    tb_produtos.refresh();
+
+
+    }
+
+    //Método para atualizar um registro na tableview de produtos.
+    @FXML
+    private void updateProdutosEvt(ActionEvent event){
+    String id = txtprodutosid.getText();
+    String nome = txtprodutosnome.getText();
+    String prazo = txtprodutosprazo.getText();
+    String categoria = txtprodutoscategoria.getText();
+    String valor = txtprodutosvalor.getText();
+    Produtos produtos = tb_produtos.getSelectionModel().getSelectedItem();
+
+       if(produtos != null) {
+           if (!Alerts.checkTextFields2(nome, prazo, categoria, valor)) {
+               Alerts.showAlert("Erro", "por favor preencha os campos.");
+           }
+
+           float pass = Float.parseFloat(valor);
+           Date getTime = converterData(prazo);
+
+           if (getTime == null) {
+                Alerts.showAlert("Erro", "formato de data Inválido");
+           }
+
+       produtos.setId(Integer.parseInt(id));
+       produtos.setNome(nome);
+       produtos.setPrazo(getTime);
+       produtos.setCategoria(categoria);
+       produtos.setValor(pass);
+       updateProdutos(produtos);
+
+       tb_produtos.refresh();
+
+       }
+
+
+    }
+
+    //Método de Deletar um registro da tableView
+    @FXML
+    private void deleteProdutosEvt(ActionEvent event){
+
+        Produtos produtos = tb_produtos.getSelectionModel().getSelectedItem();
+        if(produtos != null){
+            DELETE.deleteProdutos(produtos);
+        }
+
+        tb_produtos.getItems().remove(produtos);
+        tb_produtos.refresh();
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     // precisamos converter para observablelist para setar os items
     loadList();
     loadPerfil();
     inicializaTables();
+
 
     }
 
