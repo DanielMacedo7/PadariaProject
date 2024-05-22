@@ -63,7 +63,7 @@ public class UPDATE {
 
             statement.setString(1, funcionario.getNome());
             statement.setString(2, funcionario.getTelefone());
-            statement.setString(3, funcionario.getTelefone());
+            statement.setString(3, funcionario.getEndereco());
             statement.setInt(4, funcionario.getId());
             statement.execute();
 
