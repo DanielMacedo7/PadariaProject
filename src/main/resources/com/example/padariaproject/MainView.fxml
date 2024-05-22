@@ -127,7 +127,7 @@
                                     <String fx:value="radius" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="tb_funcionarios" layoutX="28.0" layoutY="24.0" prefHeight="254.0" prefWidth="576.0">
+                                    <TableView fx:id="tb_funcionarios" layoutX="28.0" layoutY="24.0" onMouseClicked="#PreencherFieldsFuncionarios" prefHeight="254.0" prefWidth="576.0" tableMenuButtonVisible="true">
                                        <columns>
                                           <TableColumn fx:id="tb_funcioid" prefWidth="59.0" text="ID" />
                                           <TableColumn fx:id="tb_funcionome" prefWidth="157.0" text="NOME" />
@@ -137,39 +137,40 @@
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <Button layoutX="689.0" layoutY="44.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="105.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="ADICIONAR" textFill="WHITE">
+                              <Button fx:id="btnadicionarfun" layoutX="689.0" layoutY="44.0" mnemonicParsing="false" onAction="#saveFuncionarioEvt" prefHeight="33.0" prefWidth="105.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="ADICIONAR" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Black" size="15.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="691.0" layoutY="125.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="LIMPAR" textFill="WHITE">
+                              <Button fx:id="btnlimparfun" layoutX="691.0" layoutY="125.0" mnemonicParsing="false" onAction="#ClearFieldsFuncionarios" prefHeight="33.0" prefWidth="100.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="LIMPAR" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Black" size="15.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="687.0" layoutY="264.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="108.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="DELETAR" textFill="WHITE">
+                              <Button fx:id="btndeletarfun" layoutX="687.0" layoutY="264.0" mnemonicParsing="false" onAction="#deleteFuncionarioEvt" prefHeight="33.0" prefWidth="108.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="DELETAR" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Black" size="15.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="689.0" layoutY="195.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="104.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="ATUALIZAR" textFill="WHITE">
+                              <Button fx:id="btnupdatefun" layoutX="689.0" layoutY="195.0" mnemonicParsing="false" onAction="#updateFuncionarioEvt" prefHeight="33.0" prefWidth="104.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="ATUALIZAR" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Black" size="15.0" />
                                  </font>
                               </Button>
-                              <TextField layoutX="88.0" layoutY="347.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtfuncionome" layoutX="88.0" layoutY="347.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtfunciotelefone" layoutX="88.0" layoutY="409.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtfuncioendereco" layoutX="419.0" layoutY="348.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtfuncioid" layoutX="88.0" layoutY="318.0" visible="false" />
                               <Label layoutX="31.0" layoutY="355.0" prefHeight="18.0" prefWidth="46.0" text="Nome:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="88.0" layoutY="409.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
                               <Label layoutX="24.0" layoutY="416.0" prefHeight="18.0" prefWidth="60.0" text="Telefone:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="419.0" layoutY="348.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
                               <Label layoutX="342.0" layoutY="355.0" prefHeight="18.0" prefWidth="77.0" text="Endereço:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
@@ -295,7 +296,7 @@
                                     <String fx:value="radius" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="tb_produtos" layoutX="32.0" layoutY="22.0" prefHeight="257.0" prefWidth="573.0">
+                                    <TableView fx:id="tb_produtos" layoutX="32.0" layoutY="22.0" onMouseClicked="#PreencherFieldsProdutos" prefHeight="257.0" prefWidth="573.0" tableMenuButtonVisible="true">
                                       <columns>
                                         <TableColumn fx:id="tb_produtosid" prefWidth="59.0" text="ID" />
                                         <TableColumn fx:id="tb_produtosnome" prefWidth="138.0" text="NOME" />
@@ -306,45 +307,46 @@
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <Button layoutX="689.0" layoutY="44.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="105.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="ADICIONAR" textFill="WHITE">
+                              <Button fx:id="btnadicionarprodutos" layoutX="689.0" layoutY="44.0" mnemonicParsing="false" onAction="#saveProdutosEvt" prefHeight="33.0" prefWidth="105.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="ADICIONAR" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Black" size="15.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="691.0" layoutY="125.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="LIMPAR" textFill="WHITE">
+                              <Button fx:id="btnlimparprodutos" layoutX="691.0" layoutY="125.0" mnemonicParsing="false" onAction="#ClearFieldsProdutos" prefHeight="33.0" prefWidth="100.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="LIMPAR" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Black" size="15.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="687.0" layoutY="264.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="108.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="DELETAR" textFill="WHITE">
+                              <Button fx:id="btndeletarprodutos" layoutX="687.0" layoutY="264.0" mnemonicParsing="false" onAction="#deleteProdutosEvt" prefHeight="33.0" prefWidth="108.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="DELETAR" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Black" size="15.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="689.0" layoutY="195.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="104.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="ATUALIZAR" textFill="WHITE">
+                              <Button fx:id="btnatualizarprodutos" layoutX="689.0" layoutY="195.0" mnemonicParsing="false" onAction="#updateProdutosEvt" prefHeight="33.0" prefWidth="104.0" styleClass="logout-btn" stylesheets="@Styles/NewCss.css" text="ATUALIZAR" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Black" size="15.0" />
                                  </font>
                               </Button>
-                              <TextField layoutX="88.0" layoutY="347.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtprodutosnome" layoutX="88.0" layoutY="347.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtprodutosprazo" layoutX="88.0" layoutY="407.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtprodutoscategoria" layoutX="420.0" layoutY="347.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtprodutosvalor" layoutX="422.0" layoutY="417.0" prefHeight="33.0" prefWidth="73.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtprodutosid" layoutX="88.0" layoutY="318.0" visible="false" />
                               <Label layoutX="31.0" layoutY="355.0" prefHeight="18.0" prefWidth="46.0" text="Nome:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="88.0" layoutY="407.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
                               <Label layoutX="29.0" layoutY="415.0" prefHeight="18.0" prefWidth="41.0" text="Prazo:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="419.0" layoutY="357.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
-                              <Label layoutX="342.0" layoutY="365.0" prefHeight="18.0" prefWidth="77.0" text="Categoria:">
+                              <Label layoutX="343.0" layoutY="355.0" prefHeight="18.0" prefWidth="77.0" text="Categoria:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="422.0" layoutY="417.0" prefHeight="33.0" prefWidth="73.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
                               <Label layoutX="356.0" layoutY="424.0" prefHeight="18.0" prefWidth="50.0" text="Valor:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
