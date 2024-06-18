@@ -41,6 +41,7 @@ public class SELECT {
     }
 
 
+
     public static List<Funcionario> funcionariofindAll(){
 
         String sql = "SELECT * FROM Funcionario";
@@ -103,6 +104,7 @@ public class SELECT {
                 produtos.setPrazo(resultSet.getDate("prazo"));
                 produtos.setCategoria(resultSet.getString("categoria"));
                 produtos.setValor(resultSet.getFloat("valor"));
+                produtos.setQuantidade(resultSet.getInt("quantidade"));
                 produtosList.add(produtos);
 
             }
@@ -155,5 +157,7 @@ public class SELECT {
 
 
     }
+
+
 
 }

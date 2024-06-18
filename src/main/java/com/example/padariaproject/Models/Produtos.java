@@ -9,16 +9,25 @@ public class Produtos {
     private Date prazo;
     private String categoria;
     private float valor;
+    private int quantidade;
 
     public Produtos(){
 
     }
-    public Produtos(int id, String nome, Date prazo, String categoria, float valor) {
+    public Produtos(int id, String nome, Date prazo, String categoria, float valor, int quantidade) {
         this.id = id;
         this.nome = nome;
         this.prazo = prazo;
         this.categoria = categoria;
         this.valor = valor;
+        this.quantidade = quantidade;
+    }
+
+    public Produtos(String nome, String categoria, float valor, int quantidade) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.valor = valor;
+        this.quantidade = quantidade;
     }
 
     public int getId() {
@@ -61,6 +70,15 @@ public class Produtos {
         this.valor = valor;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+
     @Override
     public String toString() {
         return "Produtos{" +
@@ -69,8 +87,7 @@ public class Produtos {
                 ", prazo=" + prazo +
                 ", categoria='" + categoria + '\'' +
                 ", valor=" + valor +
+                ", quantidade=" + quantidade +
                 '}';
     }
-
-
 }

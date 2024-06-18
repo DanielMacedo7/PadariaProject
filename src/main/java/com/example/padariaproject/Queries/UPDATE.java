@@ -88,7 +88,8 @@ public class UPDATE {
                 "nome = ?, " +
                 "prazo = ?," +
                 "categoria = ?, " +
-                "valor = ? " +
+                "valor = ?, " +
+                "quantidade = ? " +
                 "WHERE id = ?";
 
         try{
@@ -99,7 +100,8 @@ public class UPDATE {
             statement.setDate(2, new Date(produtos.getPrazo().getTime())); // aqui é tipo date então precisamos converter
             statement.setString(3, produtos.getCategoria());
             statement.setFloat(4, produtos.getValor());
-            statement.setInt(5, produtos.getId());
+            statement.setInt(5, produtos.getQuantidade());
+            statement.setInt(6, produtos.getId());
             statement.execute();
 
         }catch(SQLException e){

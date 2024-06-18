@@ -37,6 +37,7 @@ public class INSERT {
 
     }
 
+
     public static void saveFuncionario(Funcionario funcionario){
 
         Connection connection = null;
@@ -66,7 +67,7 @@ public class INSERT {
         Connection connection = null;
         PreparedStatement statement = null;
 
-        String sql = "INSERT INTO Produtos(nome, prazo, categoria, valor) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Produtos(nome, prazo, categoria, valor, quantidade) VALUES (?, ?, ?, ?, ?)";
 
         try{
 
@@ -77,6 +78,7 @@ public class INSERT {
             statement.setDate(2, new Date(produtos.getPrazo().getTime()));
             statement.setString(3, produtos.getCategoria());
             statement.setFloat(4, produtos.getValor());
+            statement.setInt(5, produtos.getQuantidade());
             statement.execute();
 
         }catch(SQLException e){
