@@ -8,6 +8,7 @@ import com.example.padariaproject.Queries.DELETE;
 import com.example.padariaproject.Util.Alerts;
 import com.example.padariaproject.Util.OpenWebInDesktop;
 import com.example.padariaproject.Util.PerfilSession;
+import com.example.padariaproject.Util.ProdutoStringConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,19 +19,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.StringConverter;
 
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.text.NumberFormat;
+import java.util.*;
 
 import static com.example.padariaproject.Queries.DELETE.deleteFuncionario;
 import static com.example.padariaproject.Queries.INSERT.saveFuncionario;
@@ -140,6 +141,9 @@ public class PadariaController implements Initializable {
     TableColumn tb_produtosvalor;
 
     @FXML
+    TableColumn tb_produtosquantidade;
+
+    @FXML
     TextField txtprodutosid;
 
     @FXML
@@ -157,6 +161,10 @@ public class PadariaController implements Initializable {
     TextField txtprodutosvalor;
 
     @FXML
+    TextField txtprodutosquantidade;
+
+
+    @FXML
     Button btnadicionarprodutos;
 
     @FXML
@@ -170,7 +178,11 @@ public class PadariaController implements Initializable {
 
 
 
+    @FXML
+    private Label labelvalor;
 
+    @FXML
+    private TextField txtvalorTotal;
 
     /////////////////////////////////
 
@@ -194,7 +206,7 @@ public class PadariaController implements Initializable {
     private AnchorPane paneestoque;
 
     @FXML
-    private ListView<String> listview;
+    private ListView<Produtos> listview;
 
     //////////////////////////////////
 
@@ -250,12 +262,60 @@ public class PadariaController implements Initializable {
     }
 
 
-
     //Mock de list para testar a list em estoques.
     private void loadList(){
-        String[] items = {"Maça","Banana", "Pera", "Mamao"};
-        ObservableList <String> itemlist = FXCollections.observableArrayList(items);
+        //String[] items = {"Maça","Banana", "Pera", "Mamao"};
+        List <Produtos> listviewprodutos = produtosfindAll();
+        ObservableList <Produtos> itemlist = FXCollections.observableArrayList(listviewprodutos);
         listview.setItems(itemlist);
+        listview.setCellFactory(param -> new TextFieldListCell<>(new ProdutoStringConverter()));
+
+        // Permitir seleção múltipla na ListView (opcional)
+        listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+
+    @FXML
+    private void handleCalcularButtonClick() {
+        Produtos selectedProduto = listview.getSelectionModel().getSelectedItem();
+        if (selectedProduto != null) {
+            float valorTotal = selectedProduto.getValor() * selectedProduto.getQuantidade();
+            // Exibir o resultado em um alerta ou atualizar um componente na interface
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Cálculo do Produto");
+            alert.setHeaderText(null);
+            alert.setContentText("Valor Total: R$ " + String.format("%.2f", valorTotal));
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nenhum Produto Selecionado");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, selecione um produto da lista.");
+            alert.showAndWait();
+        }
+    }
+
+
+    @FXML
+    private void printValorTotal(){
+        List<Produtos> produtos = produtosfindAll();
+        float valorTotal = valorTotal(produtos);
+
+        NumberFormat formatar = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+        String formata = formatar.format(valorTotal);
+
+        labelvalor.setText("Valor total do estoque: " + formata);
+
+    }
+
+    private static float valorTotal(List<Produtos> produtos){
+        float valorTotal= 0;
+
+        for(Produtos produto : produtos){
+           valorTotal += produto.getValor() * produto.getQuantidade();
+        }
+
+        return valorTotal;
     }
 
 
@@ -407,12 +467,16 @@ public class PadariaController implements Initializable {
         int passid = produtos.getId();
         String receiveid = String.valueOf(passid);
 
+        int passqtd = produtos.getQuantidade();
+        String receiveqtd = String.valueOf(passqtd);
+
         if(x == -1) return; // validação para checar se o indice for = - 1 então não existe algo selecionado
         txtprodutosid.setText(receiveid);
         txtprodutosnome.setText(produtos.getNome());
         txtprodutosprazo.setText(produtos.getPrazo().toString());
         txtprodutoscategoria.setText(produtos.getCategoria());
         txtprodutosvalor.setText(receive);
+        txtprodutosquantidade.setText(receiveqtd);
     }
 
 
@@ -431,11 +495,9 @@ public class PadariaController implements Initializable {
         tb_produtosprazo.setCellValueFactory(new PropertyValueFactory<>("prazo"));
         tb_produtoscategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         tb_produtosvalor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+        tb_produtosquantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 
     }
-
-
-    //Métodos para limpar txtfields nas Screens de Funcionarios e Produtos.
     public void ClearFieldsFuncionarios(){
         txtfuncionome.clear();
         txtfunciotelefone.clear();
@@ -448,6 +510,7 @@ public class PadariaController implements Initializable {
         txtprodutosprazo.clear();
         txtprodutoscategoria.clear();
         txtprodutosvalor.clear();
+        txtprodutosquantidade.clear();
     }
 
 
@@ -521,13 +584,15 @@ public class PadariaController implements Initializable {
     String prazo = txtprodutosprazo.getText();
     String categoria = txtprodutoscategoria.getText();
     String valor = txtprodutosvalor.getText();
+    String quantidade = txtprodutosquantidade.getText();
     Produtos produtos = new Produtos();
 
-    if(!Alerts.checkTextFields2(nome, prazo, categoria, valor)){
+    if(!Alerts.checkTextFields2(nome, prazo, categoria, valor, quantidade)){
         Alerts.showAlert("Erro", "por favor preencha os campos necessários.");
     }
 
     float x = Float.parseFloat(valor);
+    int z = Integer.parseInt(quantidade);
 
     Date getTime = converterData(prazo);
     ;
@@ -541,6 +606,7 @@ public class PadariaController implements Initializable {
     produtos.setPrazo(getTime);
     produtos.setCategoria(categoria);
     produtos.setValor(x);
+    produtos.setQuantidade(z);
     saveProdutos(produtos);
 
 
@@ -558,14 +624,16 @@ public class PadariaController implements Initializable {
     String prazo = txtprodutosprazo.getText();
     String categoria = txtprodutoscategoria.getText();
     String valor = txtprodutosvalor.getText();
+    String quantidade = txtprodutosquantidade.getText();
     Produtos produtos = tb_produtos.getSelectionModel().getSelectedItem();
 
        if(produtos != null) {
-           if (!Alerts.checkTextFields2(nome, prazo, categoria, valor)) {
+           if (!Alerts.checkTextFields2(nome, prazo, categoria, valor, quantidade)) {
                Alerts.showAlert("Erro", "por favor preencha os campos.");
            }
 
            float pass = Float.parseFloat(valor);
+           int passqtd = Integer.parseInt(quantidade);
            Date getTime = converterData(prazo);
 
            if (getTime == null) {
@@ -577,6 +645,7 @@ public class PadariaController implements Initializable {
        produtos.setPrazo(getTime);
        produtos.setCategoria(categoria);
        produtos.setValor(pass);
+       produtos.setQuantidade(passqtd);
        updateProdutos(produtos);
 
        tb_produtos.refresh();
@@ -606,6 +675,7 @@ public class PadariaController implements Initializable {
     loadList();
     loadPerfil();
     inicializaTables();
+    printValorTotal();
 
 
     }
