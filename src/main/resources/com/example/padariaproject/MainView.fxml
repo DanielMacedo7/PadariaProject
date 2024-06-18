@@ -67,36 +67,41 @@
                         </AnchorPane>
                         <AnchorPane fx:id="paneestoque" layoutX="10.0" layoutY="3.0" prefHeight="494.0" prefWidth="800.0" visible="false">
                            <children>
-                              <AnchorPane layoutX="19.0" layoutY="14.0" prefHeight="437.0" prefWidth="312.0" stylesheets="@Styles/NewCss.css">
+                              <AnchorPane layoutX="19.0" layoutY="14.0" prefHeight="266.0" prefWidth="755.0" stylesheets="@Styles/NewCss.css">
                                  <styleClass>
                                     <String fx:value="shadow" />
                                     <String fx:value="white-bg" />
                                     <String fx:value="radius" />
                                  </styleClass>
                                  <children>
-                                    <ListView fx:id="listview" layoutX="15.0" layoutY="10.0" prefHeight="418.0" prefWidth="279.0" stylesheets="@Styles/NewCss.css">
+                                    <ListView fx:id="listview" layoutX="25.0" layoutY="17.0" prefHeight="233.0" prefWidth="715.0" stylesheets="@Styles/NewCss.css">
                                        <styleClass>
-                                          <String fx:value="list-cell" />
-                                          <String fx:value="list-view" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="radius" />
                                        </styleClass>
                                     </ListView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="372.0" layoutY="340.0" prefHeight="116.0" prefWidth="395.0" stylesheets="@Styles/NewCss.css">
+                              <AnchorPane layoutX="395.0" layoutY="311.0" prefHeight="126.0" prefWidth="356.0" stylesheets="@Styles/NewCss.css">
                                  <styleClass>
                                     <String fx:value="shadow" />
                                     <String fx:value="white-bg" />
                                     <String fx:value="radius" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="14.0" layoutY="7.0" prefHeight="30.0" prefWidth="336.0" text="Valor total do estoque atual:" textFill="#6be823">
+                                    <Label layoutX="14.0" layoutY="7.0" prefHeight="30.0" prefWidth="336.0" text="Valor total do estoque atual" textFill="#6be823">
                                        <font>
                                           <Font name="Segoe UI Black" size="20.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="labelvalor" layoutX="14.0" layoutY="58.0" prefHeight="30.0" prefWidth="380.0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="372.0" layoutY="10.0" prefHeight="299.0" prefWidth="394.0" stylesheets="@Styles/NewCss.css">
+                              <AnchorPane layoutX="37.0" layoutY="311.0" prefHeight="126.0" prefWidth="335.0" stylesheets="@Styles/NewCss.css">
                                  <styleClass>
                                     <String fx:value="shadow" />
                                     <String fx:value="white-bg" />
@@ -108,12 +113,7 @@
                                           <Font name="Segoe UI Black" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutX="34.0" layoutY="71.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="149.0" text="Frios" />
-                                    <Button layoutX="224.0" layoutY="71.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="149.0" text="Salgados" />
-                                    <Button layoutX="34.0" layoutY="136.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="149.0" text="Doces" />
-                                    <Button layoutX="224.0" layoutY="136.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="149.0" text="Pães" />
-                                    <Button layoutX="34.0" layoutY="206.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="149.0" text="Bebidas" />
-                                    <Button layoutX="224.0" layoutY="206.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="149.0" text="Gourmet" />
+                                    <Button fx:id="btncalcule" layoutX="94.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleCalcularButtonClick" prefHeight="28.0" prefWidth="149.0" text="Calcule" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -299,10 +299,11 @@
                                     <TableView fx:id="tb_produtos" layoutX="32.0" layoutY="22.0" onMouseClicked="#PreencherFieldsProdutos" prefHeight="257.0" prefWidth="573.0" tableMenuButtonVisible="true">
                                       <columns>
                                         <TableColumn fx:id="tb_produtosid" prefWidth="59.0" text="ID" />
-                                        <TableColumn fx:id="tb_produtosnome" prefWidth="138.0" text="NOME" />
-                                          <TableColumn fx:id="tb_produtosprazo" prefWidth="92.0" text="PRAZO" />
-                                          <TableColumn fx:id="tb_produtoscategoria" prefWidth="158.0" text="CATEGORIA" />
-                                          <TableColumn fx:id="tb_produtosvalor" prefWidth="122.0" text="VALOR" />
+                                        <TableColumn fx:id="tb_produtosnome" prefWidth="133.0" text="NOME" />
+                                          <TableColumn fx:id="tb_produtosprazo" prefWidth="97.0" text="PRAZO" />
+                                          <TableColumn fx:id="tb_produtoscategoria" prefWidth="87.0" text="CATEGORIA" />
+                                          <TableColumn fx:id="tb_produtosvalor" prefWidth="82.0" text="VALOR" />
+                                          <TableColumn fx:id="tb_produtosquantidade" prefWidth="97.0" text="QUANTIDADE" />
                                       </columns>
                                     </TableView>
                                  </children>
@@ -330,8 +331,9 @@
                               <TextField fx:id="txtprodutosnome" layoutX="88.0" layoutY="347.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
                               <TextField fx:id="txtprodutosprazo" layoutX="88.0" layoutY="407.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
                               <TextField fx:id="txtprodutoscategoria" layoutX="420.0" layoutY="347.0" prefHeight="33.0" prefWidth="226.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
-                              <TextField fx:id="txtprodutosvalor" layoutX="422.0" layoutY="417.0" prefHeight="33.0" prefWidth="73.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
+                              <TextField fx:id="txtprodutosvalor" layoutX="422.0" layoutY="417.0" prefHeight="33.0" prefWidth="47.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
                               <TextField fx:id="txtprodutosid" layoutX="88.0" layoutY="318.0" visible="false" />
+                              <TextField fx:id="txtprodutosquantidade" layoutX="612.0" layoutY="417.0" prefHeight="33.0" prefWidth="36.0" styleClass="text-field" stylesheets="@Styles/NewCss.css" />
                               <Label layoutX="31.0" layoutY="355.0" prefHeight="18.0" prefWidth="46.0" text="Nome:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
@@ -348,6 +350,11 @@
                                  </font>
                               </Label>
                               <Label layoutX="356.0" layoutY="424.0" prefHeight="18.0" prefWidth="50.0" text="Valor:">
+                                 <font>
+                                    <Font name="Segoe UI" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="518.0" layoutY="424.0" prefHeight="18.0" prefWidth="84.0" text="Quantidade:">
                                  <font>
                                     <Font name="Segoe UI" size="14.0" />
                                  </font>

@@ -112,20 +112,10 @@
 }
 
 .list-view {
-    -fx-background-color: linear-gradient(to bottom, #228b22, #6be823); /* Gradiente linear de cima para baixo */
+    -fx-background-color: linear-gradient(to bottom, #FFFCFC, #696666); /* Gradiente linear de cima para baixo */
 }
 
 /* Estilo para os itens da ListView */
-.list-view .list-cell {
-    -fx-background-color: white; /* Fundo branco para cada item */
-    -fx-background-insets: 0, 1, 2; /* Inset do gradiente */
-    -fx-padding: 10px; /* Espaçamento interno */
-    -fx-border-color: #2ecc71; /* Cor da borda */
-    -fx-border-width: 1px; /* Espessura da borda */
-    -fx-border-radius: 5px; /* Raio da borda arredondada */
-}
+
 
 /* Estilo para o texto dentro dos itens da ListView */
-.list-view .list-cell .text {
-    -fx-text-fill: white; /* Cor do texto branco */
-}
