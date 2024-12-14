@@ -1,4 +1,4 @@
-# Projeto PadariaApp da Disciplina extensiva de Java Orientada a Objetos
+# Projeto PadariaApp
 ### estou criando esse read.me para anexar fotos do sistema e uma documentação que será criada no final dessa disciplina, documentação esses referente a todo o sistema.
 
 ### Stacks utilizadas até agora: Java, JDBC, JavaFX e CSS.
